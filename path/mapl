@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if (( $# < 2 )); then
+    echo "Usage: `basename $0` COMMAND ARGS..." >&2
+    exit 1
+fi
+
+map "$@" | less -R
