@@ -8,3 +8,5 @@ java.nanorc: java.expand.nanorc
 
 prolog.nanorc: prolog.common.nanorc prolog.expand.nanorc
 	./expand.py prolog.expand.nanorc > prolog.nanorc
+
+.phony: all
