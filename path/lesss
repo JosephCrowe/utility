@@ -1,2 +1,2 @@
 #!/bin/bash
-catt $* | less -R
+cats $* | less -R
