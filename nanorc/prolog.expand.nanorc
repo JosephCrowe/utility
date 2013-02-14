@@ -1,0 +1,6 @@
+syntax "prolog" "\.(pro|P)$"
+#include prolog.common.nanorc
+
+syntax "prolog"
+header "Prolog"
+#include prolog.common.nanorc

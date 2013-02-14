@@ -1,0 +1,7 @@
+syntax "haskell" "\.hs$"
+#include haskell.common.nanorc
+
+syntax "lhaskell" "\.lhs$"
+#include haskell.common.nanorc
+color brightblue "^>"
+color brightblack "^[^>].*"

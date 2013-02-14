@@ -1,0 +1,12 @@
+syntax "html" "\.html?$"
+
+color green start="<" end=">"
+color brightgreen ""[^"]*""
+color white start=">" end="<"
+color brightcyan "&[^;]+;"
+color brightgreen "</|<|>|="
+color brightgreen start="<!" end=">"
+color brightblack start="<!--" end="-->"
+
+color ,blue "	+"
+color ,red "[[:space:]]+$"

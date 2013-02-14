@@ -1,0 +1,70 @@
+syntax "java" "\.java$"
+
+#define ErrorCol brightred
+#define TrailWSCol blue
+#define TabCol red
+#define KeywordCol brightcyan
+#define SeparatorCol brightwhite
+#define OperatorCol brightgreen
+#define IdentifierCol white
+#define LiteralCol brightmagenta
+#define CommentCol brightblue
+#define AnnotationCol brightyellow
+
+color %ErrorCol% "\S+"
+color %SeparatorCol% "%Separator%"
+color %OperatorCol% "%Operator%"
+color %LiteralCol% "%IntLit%|%FloLit%"
+color %IdentifierCol% "\b%Identifier%\b"
+color %KeywordCol% "\b%Keyword%\b"
+color %AnnotationCol% "@%Identifier%\b"
+color %LiteralCol% "\b(%BooLit%|%NulLit%)\b"
+color %LiteralCol% "%ChaLit%"
+color %LiteralCol% "%StrLit%"
+color %CommentCol% "//.*"
+color %CommentCol% start="/\*" end="\*/"
+color %CommentCol% start="/\*\*" end="\*/"
+color ,%TrailWSCol% "[[:space:]]+$"
+color ,%TabCol% "	+"
+
+#define Identifier [A-Za-z_$][0-9A-Za-z_$]*
+
+#define Keyword (%KwAB%|%KwC%|%KwDE%|%KwFG%|%KwI%|%KwLNP%|%KwRS%|%KwT%|%KwVW%)
+#define KwAB abstract|assert|boolean|break|byte
+#define KwC case|catch|char|class|const|continue
+#define KwDE default|do|double|else|enum|extends
+#define KwFG final(lly)?|float|for|goto
+#define KwI if|implements|import|instanceof|int|interface
+#define KwLNP long|new|package|private|protected|public
+#define KwRS return|short|static|strictfp|super|switch
+#define KwT this|throws?|transient|try
+#define KwVW void|volatile|while
+
+#define IntLit (%DecNum%|%HexNum%|%OctNum%|%BinNum%)[lL]?
+#define DecNum (0|[1-9]([0-9_]*[0-9])?)
+#define HexNum 0[xX]%Hgs%
+#define Hgs %Hgt%((%Hgt%)*%Hgt%)?
+#define Hgt [0-9A-Fa-f]
+#define OctNum 0[0-7]([0-7_]*[0-7])?
+#define BinNum 0[bB][01]([01_]*[01])?
+
+#define FloLit (%DecFlit%|%HexFlit%)
+#define DecFlit (%DecFlitDot%|%DecFlitNot%)
+#define DecFlitDot (%Dgs%\.(%Dgs%)?|\.%Dgs%)(%Exp%)?(%Fsx%)?
+#define DecFlitNot %Dgs%(%Exp%(%Fsx%)?|%Fsx%)
+#define Dgs [0-9]([0-9_]*[0-9])?
+#define Exp [eE][+-]?%Dgs%
+#define Fsx [fFdD]
+#define HexFlit 0[xX](%Hgs%|%Hgs%\.(%Hgs%)?|\.%Hgs%)[pP][+-]?%Dgs%(%Fsx%)?
+
+#define BooLit (true|false)
+
+#define ChaLit '(\\.|[^'\\])'
+
+#define StrLit "(\\.|[^"\\])*"
+
+#define NulLit null
+
+#define Separator \(|\)|\{|\}|\[|\]|;|,|\.
+
+#define Operator ((=|>>?>?|<<?|!|&|\||\+|-|\*|/|^|%)=?|~|\?|:)
