@@ -1,7 +1,0 @@
-#!/bin/bash
-
-for f in $*; do
-    echo -e "\e[1;33m====== $f ======\e[m"
-    cat $f
-    echo
-done

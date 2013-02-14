@@ -1,2 +1,2 @@
 #!/bin/bash
-cats $* | less -R
+maps cat $* | less -R

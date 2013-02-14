@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $# == 0 ]]; then
+    echo "Usage: `basename $0` COMMAND FILES..." >&2
+fi
+
+for F in "${@:2}"; do
+    echo -e "\e[1;33m====== $F ======\e[m"
+    "$1" "$F"
+    echo
+done
