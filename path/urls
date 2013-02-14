@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CMD=$1
+
+if [[ $CMD == "" ]]; then
+    CMD=echo;
+fi
+
+if [[ $@ == "xdg-open" ]]; then
+    echo "NOTICE: use \`xurls' instead of \`urls xdg-open'."
+fi
+
+xpaste | for URL in `grep -Po 'https?:[^\s()]+'`; do $CMD $URL; done
+

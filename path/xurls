@@ -1,0 +1,3 @@
+#!/bin/bash
+
+urls xdg-open --from-xurls
