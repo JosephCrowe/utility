@@ -2,5 +2,5 @@ syntax "prolog" "\.(pro|P)$"
 #include prolog.common.nanorc
 
 syntax "prolog"
-header "Prolog"
+header "Prolog|prolog|SICStus"
 #include prolog.common.nanorc
