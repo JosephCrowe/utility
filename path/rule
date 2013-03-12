@@ -9,6 +9,8 @@ if lang == 'c':
     print('/' + '*'*78 + '/')
 elif lang == 'py':
     print('#' + '-'*79)
+elif lang == 'pro':
+    print('%'*80)
 else:
     print('Error: "%s" is not a recognised language.' % lang, file=sys.stderr)
     sys.exit(1)
