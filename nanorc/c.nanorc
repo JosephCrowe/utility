@@ -30,4 +30,4 @@ color brightblue start="/\*" end="\*/"
 color ,blue "[[:space:]]+$"
 
 ## Tabs
-color ,red "	"
+color ,blue "	"
