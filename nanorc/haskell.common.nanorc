@@ -8,7 +8,7 @@ color brightgreen "\(|\)|\[|\]|\{|\}|,|;|`"
 
 color white "\b[a-z]([A-Za-z0-9]|_|')*"
 color cyan "\b[A-Z]([A-Za-z0-9]|_|')*"
-color brightcyan "\b(case|class |data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_)\b"
+color brightcyan "\b(case|class |data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified)\b"
 
 color brightmagenta ""(\\.|[^"])*"|'(\\.|[^'])'"
 
