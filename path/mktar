@@ -1,0 +1,6 @@
+#!/bin/bash
+
+HSIZE=`du -bsch "$@" | grep -E '\stotal$' | grep -Eo '^\S+'`
+echo "Total size: ${HSIZE}" >&2
+KSIZE=`du -bsc "$@" | grep -E '\stotal$' | grep -Eo '^\S+'`
+tar -c "$@" | pv -s ${KSIZE}
