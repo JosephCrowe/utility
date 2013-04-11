@@ -1,22 +1,30 @@
 #include <stdlib.h>
 #include "list.h"
 
-list_t *list_add(list_t *list, int value) {
-    list_t *item = malloc(sizeof(list_t));
-    item->head = value;
-    item->tail = list;
-    return item;
-}
-
-list_t *list_del(list_t *list, int value) {
-    list_t head = { 0, list };
-    for (list_t *prev = &head; prev->tail != NULL; prev = prev->tail) {
-        if (prev->tail->head == value) {
-            list_t *item = prev->tail;
-            prev->tail = item->tail;
-            free(item);
-            break;
-        }
+#define LIST_C_INSTANCE(LIST, VALUE) \
+    LIST *LIST##_add(LIST *list, VALUE value) { \
+        LIST *item = malloc(sizeof(LIST)); \
+        item->head = value; \
+        item->tail = list; \
+        return item; \
+    } \
+    \
+    LIST *LIST##_pop(LIST *list) { \
+        LIST *tail = list->tail; \
+        free(list); \
+        return tail; \
+    } \
+    \
+    LIST *LIST##_del(LIST *list, VALUE value) { \
+        LIST head = { 0, list }; \
+        for (LIST *prev = &head; prev->tail != NULL; prev = prev->tail) { \
+            if (prev->tail->head == value) { \
+                prev->tail = LIST##_pop(prev->tail); \
+                break; \
+            } \
+        } \
+        return head.tail; \
     }
-    return head.tail;
-}
+
+LIST_C_INSTANCE(ilist, int)
+LIST_C_INSTANCE(plist, void *)
