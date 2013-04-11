@@ -1,4 +1,4 @@
-CC=gcc -std=c99
+CC=gcc -std=c99 -Wall
 
 pipeserve: pipeserve.c list.h list.c
 	$(CC) -o pipeserve pipeserve.c list.c
