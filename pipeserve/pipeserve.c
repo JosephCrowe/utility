@@ -1,7 +1,8 @@
 /*******************************************************************************
- *  pipeserv: accepts connections on a UNIX domain socket, forwarding each
- *            line read from stdin to each connected client, and each line read
- *            from a connected client to stdout.
+ *  pipeserv accepts connections to a UNIX domain socket in the file system,
+ *  forwarding each line of its stdin to each connected client, and each line
+ *  received from any connected client to its stdout. Lines longer than BUFFER
+ *  may be transmitted non-atomically, and hence mixed with other data.
  */
 
 #define _GNU_SOURCE
@@ -23,7 +24,7 @@
 #define UNIX_PATH_MAX 108
 
 #define BACKLOG 16
-#define BUFFER 512
+#define BUFFER 1024
 #define SIGRT_SERVER  (SIGRTMIN + 0)
 #define SIGRT_CLIENT  (SIGRTMIN + 1)
 #define SIGRT_STDIN   (SIGRTMIN + 2)
@@ -38,6 +39,9 @@ void sigrt_stdin(int, siginfo_t *, void *);
 
 char *socket_name;
 list_t *clients;
+
+char stdin_buffer[BUFFER];
+size_t stdin_bytes;
 
 int main(int argc, char **argv) {
     /* Read command-line arguments. */
@@ -88,6 +92,7 @@ int main(int argc, char **argv) {
     check(listen(server, BACKLOG));
 
     /* Set up stdin. */
+    stdin_bytes = 0;
     check(fcntl(STDIN_FILENO, F_SETSIG, SIGRT_STDIN));
     check(fcntl(STDIN_FILENO, F_SETFL, O_ASYNC | O_NONBLOCK));
     check(fcntl(STDIN_FILENO, F_SETOWN, getpid()));
@@ -134,31 +139,34 @@ void sigrt_client (int signum, siginfo_t *info, void *context) {
         }
 
         char *end = (char *) memchr(buffer, '\n', bytes);
-        if (end != NULL) {
-            /* Newline found. */
-            scheck(recv(client, (void *) buffer, bytes, 0));
-        } else if (bytes == BUFFER) {
-            /* Buffer is full, but no newline. */
-            buffer[bytes - 1] = '\n';
-        } else {
-            /* Buffer is not full, and no newline. */
-            continue;
-        }
+        if (end != NULL) bytes = end - buffer + 1;
+        else if (bytes < BUFFER) continue;
+
+        scheck(recv(client, (void *) buffer, bytes, 0));
         scheck(write(STDOUT_FILENO, (void *) buffer, bytes));
     }
 }
 
 void sigrt_stdin(int signum, siginfo_t *info, void *context) {
     for (;;) {
-        char buffer[BUFFER];
-        ssize_t bytes = read(STDIN_FILENO, (void *) &buffer, BUFFER);
+        size_t remain = BUFFER - stdin_bytes;
+        ssize_t bytes = read(STDIN_FILENO, (void *) &stdin_buffer + stdin_bytes,
+                             remain);
         if (bytes == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) break;
-        scheck(bytes);
+        stdin_bytes += scheck(bytes);
+
+        char *end = (char *) memchr(&stdin_buffer, '\n', stdin_bytes);
+        if (end != NULL) bytes = end - stdin_buffer + 1;
+        else if (stdin_bytes == BUFFER) bytes = BUFFER;
+        else continue;
 
         for (list_t *item = clients; item != NULL; item = item->tail) {
             int client = item->head;
-            scheck(send(client, (void *) &buffer, bytes, 0));
+            scheck(send(client, (void *) &stdin_buffer, bytes, 0));
         }
+
+        memmove(stdin_buffer, stdin_buffer + bytes, stdin_bytes - bytes);
+        stdin_bytes -= bytes;
     }
 }
 
