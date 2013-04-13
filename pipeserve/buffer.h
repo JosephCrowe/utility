@@ -16,9 +16,9 @@
 ssize_t buffer_readline(int fd, char **line);
 
 /* As buffer_readline() but with two additional arguments.
-   Unless the return value is -1:
    - rsize, if non-NULL, receives the actual amount of data read; and
    - rdata, if non-NULL, receives a pointer to the rsize bytes of new data.
+   These arguments are used even when the return value is -1.
    As with line, this pointer is only valid until the next call. */
 ssize_t buffer_readline_r(int fd, char **line, size_t *rsize, char **rdata);
 

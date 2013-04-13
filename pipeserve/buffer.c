@@ -47,19 +47,19 @@ ssize_t buffer_readline_r(int fd, char **line, size_t *rsize, char **rdata ) {
     char *start = buffer->end;
     ssize_t bytes;
 
-    do {
+    for (;;) {
         size_t space = BUFFER_SIZE - (buffer->end - &buffer->data[0]);
         bytes = read(buffer->fd, buffer->end, space);
-        if (bytes == -1) break;
+        if (bytes == -1 || bytes == 0) break;
         char *endl = memchr(buffer->end, '\n', bytes);
         buffer->end += bytes;
-        if (rsize != NULL) *rsize += bytes;
 
         if (endl == NULL && bytes < space) continue;
 
         bytes = (endl == NULL) ? BUFFER_SIZE : (endl + 1 - &buffer->data[0]);
         buffer->shift = bytes;
-    } while (0);
+        break;
+    }
 
     if (bytes != -1) *line = &buffer->data[0];
     if (rdata != NULL) *rdata = start;

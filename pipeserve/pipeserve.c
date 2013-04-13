@@ -1,14 +1,3 @@
-/*******************************************************************************
- *  pipeserv accepts connections to a UNIX domain socket in the file system,
- *  forwarding each line of its stdin to each connected client, and each line
- *  received from any connected client to its stdout.
- *
- *  General information is printed to stderr.
- *
- *  Lines longer than BUFFER may be transmitted non-atomically, and hence mixed
- *  with other data.
- */
-
 #define _GNU_SOURCE
 
 #include <stdio.h>
@@ -33,11 +22,10 @@
 #include "buffer.h"
 
 #define UNIX_PATH_MAX 108
-#define LAMBDA(TYPE, BODY) ({ TYPE __lambda__ BODY __lambda__; })
+#define LAMBDA(TYPE, BODY) ({ TYPE __lambda__ BODY; &__lambda__; })
 
 #define SIGRT_IO SIGRTMIN
 #define BACKLOG 16
-#define BUFFER 10
 
 static int check(int, char *);
 static void report(const char *format, ...);
@@ -81,9 +69,8 @@ int main(int argc, char **argv, char *envp[]) {
 
     struct sigaction action;
     action.sa_mask = empty;
-
     action.sa_flags = SA_RESTART;
-    action.sa_handler = &exit;
+    action.sa_handler = SIG_IGN;
     sigaction(SIGINT, &action, NULL);
 
     action.sa_flags |= SA_SIGINFO;
@@ -111,8 +98,6 @@ int main(int argc, char **argv, char *envp[]) {
     setup_io(child_out);
     setup_io(child_err);
 
-    atexit(LAMBDA(void, (void) { kill(child, SIGTERM); }));
-
     /* Set up listening socket. */
     struct sockaddr_un addr;
     addr.sun_family = AF_UNIX;
@@ -131,6 +116,7 @@ int main(int argc, char **argv, char *envp[]) {
     /* Return exit status of child. */
     siginfo_t info;
     check(waitid(P_PID, child, &info, WEXITED), "waitid()");
+    report("%s exited with status %d\n", basename(argv[2]), info.si_status);
     return info.si_status;
 }
 
@@ -158,39 +144,45 @@ static void server_io (void) {
         check(client, "accept()");
         setup_io(client);
         clients = ilist_add(clients, client);
-        report("connect(%d)\n", client);
+        report("connect (%d)\n", client);
     }
 }
 
 static void client_io (int client) {
-    char *line;
-    ssize_t size = buffer_readline(client, &line);
-    if (size == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) return;
+    for (;;) {
+        char *line;
+        ssize_t size = buffer_readline(client, &line);
+        if (size == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) break;
 
-    if (size == 0 || size == -1) {
-        clients = ilist_del(clients, client);
-        close(client);
-        buffer_clear(client);
-        if (size == 0) report("exit(%d)\n", client);
-        else report("exit(%d): %s\n", client, strerror(errno));
-        return;
+        if (size == 0 || size == -1) {
+            clients = ilist_del(clients, client);
+            close(client);
+            buffer_clear(client);
+            if (size == 0) report("exit (%d)\n", client);
+            else report("exit (%d): %s\n", client, strerror(errno));
+            break;
+        }
+
+        report("(%d) ", client);
+        check(write(STDERR_FILENO, line, size), "write()");
+        if (line[size-1] != '\n') fprintf(stderr, "\\\n");
+
+        check(write(child_in, line, size), "write()");
     }
-
-    report("(%d) ", client);
-    check(write(STDERR_FILENO, line, size), "write()");
-    if (line[size-1] != '\n') fprintf(stderr, "\\\n");
-
-    check(write(child_in, line, size), "write()");
-
-    client_io(client);
 }
 
 static void stdin_io(void) {
     for (;;) {
-        ssize_t bytes = splice(STDIN_FILENO, NULL, child_in,
-                               NULL, BUFFER_SIZE, SPLICE_F_NONBLOCK);
-        if (bytes == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) break;
-        check(bytes, "splice()");
+        char *line;
+        ssize_t size = buffer_readline(STDIN_FILENO, &line);
+        if (size == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) break;
+
+        if (check(size, "read()") == 0) {
+            report("EOF (%d)\n", STDIN_FILENO);
+            exit(EXIT_SUCCESS);
+        }
+
+        check(write(child_in, line, size), "write()");
     }
 }
 
@@ -226,8 +218,8 @@ static int check (int result, char *source) {
 }
 
 static void report(const char *format, ...) {
-    va_list ap;
-    va_start(ap, format);
+    va_list args;
+    va_start(args, format);
     fprintf(stderr, "%s: ", program_name);
-    vfprintf(stderr, format, ap);
+    vfprintf(stderr, format, args);
 }
