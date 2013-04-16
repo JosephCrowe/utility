@@ -89,17 +89,13 @@ int main(int argc, char **argv, char *envp[]) {
 
     socket_name = argv[1];
 
-    /* Set up signal handlers. */
+    /* Set up signal handler for SIGRT_IO. */
     sigset_t empty;
     sigemptyset(&empty);
 
     struct sigaction action;
     action.sa_mask = empty;
-    action.sa_flags = SA_RESTART;
-    action.sa_handler = SIG_IGN;
-    sigaction(SIGINT, &action, NULL);
-
-    action.sa_flags |= SA_SIGINFO;
+    action.sa_flags = SA_RESTART | SA_SIGINFO;
     action.sa_sigaction = &handle_io;
     sigaction(SIGRT_IO, &action, NULL);
 
@@ -123,6 +119,11 @@ int main(int argc, char **argv, char *envp[]) {
     child_err = child_stderr[0];
     setup_io(child_out);
     setup_io(child_err);
+
+    /* Set up signal handler for SIGINT. */
+    action.sa_flags = SA_RESTART;
+    action.sa_handler = LAMBDA(void, (int s) { kill(child, s); });
+    sigaction(SIGINT, &action, NULL);
 
     /* Set up listening socket. */
     struct sockaddr_un addr;
