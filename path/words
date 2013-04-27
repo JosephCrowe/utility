@@ -1,0 +1,2 @@
+#!/bin/bash
+py '"\n".join(re.findall(r"\b[^\s\d!?.;:,]+\b", sys.stdin.read()))'

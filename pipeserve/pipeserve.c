@@ -228,7 +228,7 @@ static void child_io(int fd) {
         check(write(target, rdata, rsize), "write()");
 
         if (again) break;
-        if (target == child_err) continue;
+        if (fd == child_err) continue;
 
         for (ilist *i = clients; i != NULL; i = i->tail) {
             int client = i->head;
