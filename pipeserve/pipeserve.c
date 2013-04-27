@@ -9,7 +9,7 @@
  *    pipeserve's stdin, sends this to the child process's stdin pipe.
  *
  *  - For each '\n'-terminated line received from the child process's stdout
- *    or stderr pipe, sends this to all connected clients.
+ *    pipe, sends this to all connected clients.
  *
  *  - Status information is printed to pipeserve's stderr, prepended with
  *    "EXEC_NAME:", where EXEC_NAME is usually "pipeserve".
@@ -228,6 +228,7 @@ static void child_io(int fd) {
         check(write(target, rdata, rsize), "write()");
 
         if (again) break;
+        if (target == child_err) continue;
 
         for (ilist *i = clients; i != NULL; i = i->tail) {
             int client = i->head;
