@@ -10,13 +10,16 @@ else:
     print 'Usage: %s FILENAME' % os.path.basename(sys.argv[0])
     sys.exit(1)
 
+def stderr(msg):
+    sys.stderr.write(msg + '\n')
+
 def include(name, parents=[]):
     parents = parents + [name]
     with open(name) as file: data = file.read()
     def repl(match):
         (child,) = match.groups()
         if child in parents:
-            print 'Error: #include cycle: ' + ' <- '.join(parents + [child])
+            stderr('Error: #include cycle: ' + ' <- '.join(parents + [child]))
             sys.exit(1)
         return include(child, parents)
     return re.sub(r'^#include (.*)\r?\n?', repl, data, flags=re.M)
@@ -36,10 +39,10 @@ def expand(name, parents=[]):
     def repl(match):
         (child,) = match.groups()
         if child not in defns:
-            print 'Error: %s is not defined: ' % child + defns[name]
+            stderr('Error: %s is not defined: ' % child + defns[name])
             sys.exit(1)
         if child in parents:
-            print 'Error: #define cycle: ' + ' <- '.join(parents + [child])
+            stderr('Error: #define cycle: ' + ' <- '.join(parents + [child]))
             sys.exit(1)
         return expand(child, parents)
     defns[name] = re.sub(r'%(\w+)%', repl, defns[name])
@@ -56,7 +59,7 @@ if '--debug' in sys.argv:
 def expand_repl(match):
     (name,) = match.groups()
     if (name not in defns):
-        print 'Error: %s is not defined.'
+        stderr('Error: %s is not defined.' % name)
         sys.exit(1)
     return defns[name]
     

@@ -1,0 +1,61 @@
+syntax "js" "\.js$"
+
+#define ErrorCol brightred
+#define ReservedCol brightred
+#define KeywordCol brightcyan
+#define IdentifierCol white
+#define PunctuatorCol brightgreen
+#define LiteralCol brightmagenta
+#define CommentCol brightblue
+#define TrailWSCol blue
+#define TabCol red
+
+color %ErrorCol% "\S+"
+color %PunctuatorCol% "%Punctuator%"
+color %IdentifierCol% "\b%Identifier%\b"
+color %KeywordCol% "\b%Keyword%\b"
+color %ReservedCol% "\b%Reserved%\b"
+color %LiteralCol% "\b(%NulLit%|%BooLit%)\b"
+color %LiteralCol% "%NumLit%"
+color %LiteralCol% "%StrLit%"
+color %LiteralCol% "%RegLit%|%StrLit%"
+color %CommentCol% "//.*"
+color %CommentCol% start="/\*" end="\*/"
+color ,%TrailWSCol% "[[:space:]]+$"
+color ,%TabCol% "	+"
+
+#define Keyword (%Kw1%|%Kw2%|%Kw3%|%Kw4%)
+#define Kw1 break|case|catch|continue|default|delete|do
+#define Kw2 else|finally|for|function|if|in|instanceof
+#define Kw3 new|return|switch|this|throw|try|typeof
+#define Kw4 var|void|while|with
+
+#define Reserved (%Re1%|%Re2%|%Re3%|%Re4%)
+#define Re1 abstract|boolean|byte|char|class|const|debugger|double
+#define Re2 enum|export|extends|final|float|goto|implements|import
+#define Re3 int|interface|long|native|package|private|protected|public
+#define Re4 short|static|super|synchronized|throws|transient|volatile
+
+#define Identifier [a-zA-Z_$][a-zA-Z0-9_$]*
+
+#define Punctuator (%Pu1%|%Pu2%|%Pu3%|%Pu4%)
+#define Pu1 |<|>|>=|==|!=|===|!==|\+|-|\*|%|\+\+|--
+#define Pu2 <<|>>|>>>|&|\||^|!|~|&&|\|\|
+#define Pu3 \{|\}|\(|\)|\[|\]|\.|;|,|\?|:
+#define Pu4 =|\+=|-=|\*=|%=|<<=|>>=|>>>=|&=|\|=|^=|/|/=
+
+#define NulLit (null)
+
+#define BooLit (true|false)
+
+#define NumLit (%DecLit%|%HexIntLit%)
+#define DecLit ((%DecIntLit%(\.[0-9]*)?|\.[0-9]+)%Exponent%?)
+#define DecIntLit (0|[1-9][0-9]*)
+#define Exponent ([eE][+-]?[0-9]+)
+#define HexIntLit 0[xX][0-9a-fA-F]+
+
+#define StrLit (%StrLitD%|%StrLitS%)
+#define StrLitD "([^"\\]|\\.)*"
+#define StrLitS '([^'\\]|\\.)*'
+
+#define RegLit (/([^/]|\\.)+/[a-zA-Z0-9_$]*)
