@@ -3,8 +3,8 @@
 #define CommentCol brightblack
 #define StringCol brightmagenta
 
-color %UpperCol% "\b[A-Z_][A-Za-z0-9_]+\b"
-color %SymbolCol% "(\(|\)|\[|\]|,|\.|:-|->|;)"
+color %UpperCol% "\b[A-Z_][A-Za-z0-9_]*\b"
+color %SymbolCol% "(\(|\)|\[|\]|,|\.|:-|->|;|\|)"
 
 color %StringCol% "'[^']*'"
 

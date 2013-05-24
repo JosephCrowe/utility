@@ -12,7 +12,7 @@ syntax "js" "\.js$"
 
 color %ErrorCol% "\S+"
 color %PunctuatorCol% "%Punctuator%"
-color %IdentifierCol% "\b%Identifier%\b"
+color %IdentifierCol% "%Identifier%"
 color %KeywordCol% "\b%Keyword%\b"
 color %ReservedCol% "\b%Reserved%\b"
 color %LiteralCol% "\b(%NulLit%|%BooLit%)\b"
@@ -36,7 +36,7 @@ color ,%TabCol% "	+"
 #define Re3 int|interface|long|native|package|private|protected|public
 #define Re4 short|static|super|synchronized|throws|transient|volatile
 
-#define Identifier [a-zA-Z_$][a-zA-Z0-9_$]*
+#define Identifier [a-zA-Z_\$][a-zA-Z0-9_\$]*
 
 #define Punctuator (%Pu1%|%Pu2%|%Pu3%|%Pu4%)
 #define Pu1 |<|>|>=|==|!=|===|!==|\+|-|\*|%|\+\+|--
