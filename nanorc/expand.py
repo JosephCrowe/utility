@@ -2,7 +2,10 @@
 import sys
 import re
 import os.path
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 if len(sys.argv) >= 2:
     filename = sys.argv[1]
@@ -22,7 +25,7 @@ def include(name, parents=[]):
             stderr('Error: #include cycle: ' + ' <- '.join(parents + [child]))
             sys.exit(1)
         return include(child, parents)
-    return re.sub(r'^#include (.*)\r?\n?', repl, data, flags=re.M)
+    return re.compile(r'^#include (.*)\r?\n?', re.M).sub(repl, data)
 
 data = include(filename)
 
@@ -32,7 +35,7 @@ def define_repl(match):
     name, value = match.groups()
     defns[name] = value.strip()
     return ''
-data = re.sub(r'^#define (\w+) (.+)(?:\r?\n?)+', define_repl, data, flags=re.M)
+data = re.compile(r'^#define (\w+) (.+)(?:\r?\n?)+', re.M).sub(define_repl, data)
 
 def expand(name, parents=[]):
     parents = parents + [name]
