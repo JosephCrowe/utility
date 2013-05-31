@@ -6,18 +6,19 @@ syntax "js" "\.js$"
 #define IdentifierCol white
 #define PunctuatorCol brightgreen
 #define LiteralCol brightmagenta
-#define CommentCol brightblue
+#define CommentCol brightblack
 #define TrailWSCol blue
 #define TabCol red
 
 color %ErrorCol% "\S+"
 color %PunctuatorCol% "%Punctuator%"
-color %LiteralCol% "\b%NumLit%\b"
+color %LiteralCol% "%NumLit%"
 color %IdentifierCol% "%Identifier%"
-color %LiteralCol% "\b(%NulLit%|%BooLit%)\b"
 color %KeywordCol% "\b%Keyword%\b"
 color %ReservedCol% "\b%Reserved%\b"
-color %LiteralCol% "%RegLit%|%StrLit%"
+color %LiteralCol% "\b(%NulLit%|%BooLit%)\b"
+color %LiteralCol% "%StrLit%"
+color %LiteralCol% "%RegLit%"
 color %CommentCol% "//.*"
 color %CommentCol% start="/\*" end="\*/"
 color ,%TrailWSCol% "[[:space:]]+$"
@@ -57,4 +58,4 @@ color ,%TabCol% "	+"
 #define StrLitD "([^"\\]|\\.)*"
 #define StrLitS '([^'\\]|\\.)*'
 
-#define RegLit (/([^/]|\\.)+/[a-zA-Z0-9_$]*)
+#define RegLit (/([^/ ]|\\.)+/[a-zA-Z0-9_$]*)
