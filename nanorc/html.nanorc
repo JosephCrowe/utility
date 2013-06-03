@@ -6,7 +6,7 @@ color white start=">" end="<"
 color brightcyan "&[^;]+;"
 color brightgreen "</|<|>|="
 color brightgreen start="<!" end=">"
-color brightblack start="<!--" end="-->"
+color brightblue start="<!--" end="-->"
 
 color ,blue "	+"
 color ,red "[[:space:]]+$"
