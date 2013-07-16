@@ -8,7 +8,7 @@ lang = sys.argv[1] if len(sys.argv) > 1 else 'c'
 if lang == 'c':
     print('/' + '*'*78 + '/')
 elif lang == 'py':
-    print('#' + '-'*79)
+    print('#' + '='*78 + '#')
 elif lang == 'pro':
     print('%'*80)
 else:
