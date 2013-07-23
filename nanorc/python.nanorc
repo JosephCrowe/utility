@@ -6,6 +6,6 @@ color brightcyan "\<(and|as|assert|break|class|continue|def|del|elif|else|except
 color brightgreen "\"([^\"\\]|\\.)*\""
 color brightgreen "'([^'\\]|\\.)*'"
 color brightred "^[	 ]*#.*$"
-color brightred "#[^'\"]*$"
+color brightred "#([^'\"]|'[^']*'|"[^"]*")*$"
 color brightgreen start="'''" end="'''"
 color brightgreen start=""""" end="""""
