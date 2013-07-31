@@ -1,0 +1,30 @@
+syntax "erlang" "\.erl$"
+
+color brightred        "\S+"
+
+color brightgreen   "(\(|\)|,|;|:|!|=|\.)"
+color brightwhite     "(\*|/|\+|-|<|>)"
+color brightwhite    "(\{|\}|\[|\]|\||#)"
+
+color brightgreen   "(->|:-|<-|::|\.\..?)"
+color brightwhite     "(\+\+|--|==|/=|=<|>=|=:=|=/=|<=|<<|>>)"
+color brightwhite    "(\|\|)"
+
+color cyan     "(\b[A-Z_][0-9A-Za-z_@]*)"
+color brightmagenta        "\?\??\w+"
+color brightblack       "(\b([0-9]+(\#[0-9a-zA-Z]+)?)\b)|(\b[0-9]+\.|\b[0-9]+\.(([eE][+-]?[0-9]+)|[0-9]+([eE][+-]?[0-9]+)?)\b|\.[0-9]+([eE][+-]?[0-9]+)?\b)"
+color brightwhite    "#(\b[a-z][0-9A-Za-z_@]*)\.(\b[a-z][0-9A-Za-z_@]*)"
+color brightwhite    "(\b[a-z][0-9A-Za-z_@]*):(\b[a-z][0-9A-Za-z_@]*)"
+color brightwhite    "(\b[a-z][0-9A-Za-z_@]*)(/[0-9]+)?"
+color white         "(\b[a-z][0-9A-Za-z_@]*)"
+color brightblack       "(\$((\\([bdefnrstv'"\\]|[0-7]{1,3}|x\{[0-9A-Fa-f]+\}|x[0-9A-Fa-f]{2}|\^[A-Z]))|.))"
+color brightwhite     "(\b(andalso|orelse|b?not|div|rem|b?and|b?x?or|b?s[lr])\b)"
+color brightcyan      "(\b(after|begin|case|try|catch|end|fun|if|of|receive|when)\b)"
+color brightblack        "('([^']|(\\([bdefnrstv'"\\]|[0-7]{1,3}|x\{[0-9A-Fa-f]+\}|x[0-9A-Fa-f]{2}|\^[A-Z])))*')|("([^"]|(\\([bdefnrstv'"\\]|[0-7]{1,3}|x\{[0-9A-Fa-f]+\}|x[0-9A-Fa-f]{2}|\^[A-Z])))*")"
+
+color brightgreen    "^-\w+"
+color brightblue      "^%.*"
+color brightblue      "[[:space:]]%([^\"]|\"([^\"]|\\.)*\")*$"
+color ,blue     "[[:space:]]+$"
+color ,blue         "	+"
+

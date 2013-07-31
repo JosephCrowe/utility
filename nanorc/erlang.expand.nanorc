@@ -1,0 +1,76 @@
+syntax "erlang" "\.erl$"
+
+#define ErrorCol        brightred
+#define TrailWSCol      blue
+#define TabCol          blue
+#define CommentCol      brightblue
+#define DirectiveCol    brightgreen
+#define MacroCol        brightmagenta
+
+#define KeywordCol      brightcyan
+#define PunctuatorCol   brightgreen
+#define OperatorCol     brightwhite
+#define StructureCol    brightwhite
+#define VariableCol     cyan
+#define AtomCol         white
+#define NumberCol       brightblack
+#define QuoteCol        brightblack
+
+color %ErrorCol%        "\S+"
+
+color %PunctuatorCol%   "%Punctuator1%"
+color %OperatorCol%     "%Operator1%"
+color %StructureCol%    "%Structure1%"
+
+color %PunctuatorCol%   "%Punctuator2%"
+color %OperatorCol%     "%Operator2%"
+color %StructureCol%    "%Structure2%"
+
+color %VariableCol%     "%Variable%"
+color %MacroCol%        "\?\??\w+"
+color %NumberCol%       "%IntegerLit%|%FloatLit%"
+color %StructureCol%    "#%AtomLitP%\.%AtomLitP%"
+color %StructureCol%    "%AtomLitP%:%AtomLitP%"
+color %StructureCol%    "%AtomLitP%(/[0-9]+)?"
+color %AtomCol%         "%AtomLitP%"
+color %NumberCol%       "%CharLit%"
+color %OperatorCol%     "%Operator3%"
+color %KeywordCol%      "%Keyword%"
+color %QuoteCol%        "%AtomLitQ%|%StringLit%"
+
+color %DirectiveCol%    "^-\w+"
+color %CommentCol%      "^%.*"
+color %CommentCol%      "[[:space:]]%([^\"]|\"([^\"]|\\.)*\")*$"
+color ,%TrailWSCol%     "[[:space:]]+$"
+color ,%TabCol%         "	+"
+
+#define Punctuator1 (\(|\)|,|;|:|!|=|\.)
+#define Punctuator2 (->|:-|<-|::|\.\..?)
+
+#define Structure1  (\{|\}|\[|\]|\||#)
+#define Structure2  (\|\|)
+
+#define Operator1   (\*|/|\+|-|<|>)
+#define Operator2   (\+\+|--|==|/=|=<|>=|=:=|=/=|<=|<<|>>)
+#define Operator3   (\b(andalso|orelse|b?not|div|rem|b?and|b?x?or|b?s[lr])\b)
+
+#define Keyword     (\b(after|begin|case|try|catch|end|fun|if|of|receive|when)\b)
+
+#define CharLit     (\$(%Escape%|.))
+
+#define IntegerLit  (\b(%D%+(\#[0-9a-zA-Z]+)?)\b)
+
+#define FloatLit    (\b%D%+\.|\b%D%+\.(%FloatE%|%D%+%FloatE%?)\b|\.%D%+%FloatE%?\b)
+#define FloatE      ([eE][+-]?%D%+)
+
+#define AtomLitP    (\b[a-z][0-9A-Za-z_@]*)
+#define AtomLitQ    ('([^']|%Escape%)*')
+
+#define StringLit   ("([^"]|%Escape%)*")
+
+#define Variable    (\b[A-Z_][0-9A-Za-z_@]*)
+
+#define Escape      (\\([bdefnrstv'"\\]|%O%{1,3}|x\{%H%+\}|x%H%{2}|\^[A-Z]))
+#define O           [0-7]
+#define D           [0-9]
+#define H           [0-9A-Fa-f]
