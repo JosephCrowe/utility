@@ -1,6 +1,6 @@
 # unattributed syntax highlighting example from wiki.linuxhelp.net/
 
-syntax "makefile" "[Mm]akefile$"
+syntax "makefile" "^[Mm]akefile$"
 color red "[:=]"
 color magenta "\<(if|ifeq|else|endif)\>"
 color blue "\$+[{(][a-zA-Z0-9_-]+[})]"

@@ -13,6 +13,14 @@ elif lang == 'pro':
     print('%'*80)
 elif lang in ('htm', 'html'):
     print('<!--' + '-'*63 + '-->')
+elif lang == 'erl':
+    print('%%%' + '='*77)
+elif lang == 'erl2':
+    print('%%' + '='*78)
+elif lang == 'erl-':
+    print('%%%' + '-'*77)
+elif lang == 'erl2-':
+    print('%%' + '-'*78)
 else:
     print('Error: "%s" is not a recognised language.' % lang, file=sys.stderr)
     sys.exit(1)
