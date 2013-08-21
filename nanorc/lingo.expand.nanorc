@@ -1,0 +1,45 @@
+syntax "lingo" "\.ls$"
+
+#===============================================================================
+#define Colour_Keyword      brightblue
+#define Colour_Punctuator   brightwhite
+#define Colour_Number       yellow
+#define Colour_String       yellow
+#define Colour_Symbol       yellow
+#define Colour_Constant     green
+#define Colour_Comment      brightred
+
+#===============================================================================
+color %Colour_Punctuator%   "%Punctuator%"
+color %Colour_Constant%     "%Constant%"
+color %Colour_Keyword%      "%Keyword%"
+color %Colour_Number%       "%Number%"
+color %Colour_Symbol%       "%Symbol%"
+color %Colour_String%       "%String%"
+color %Colour_Comment%      "%Comment%"
+
+#===============================================================================
+#define Comment     --([^"]|%String%)*$
+#define String      "[^"]*"
+#define Symbol      #[A-Za-z][0-9A-Za-z]*
+#define Number      (\.[0-9]+|[0-9]+(\.[0-9]*)?)([eE][+-][0-9]+)?
+
+#===============================================================================
+#define Constant \b(%Const1%|%Const2%)\b
+#define Const1 BACKSPACE|EMPTY|ENTER|FALSE|PI|QUOTE|RETURN|SPACE|TAB|TRUE|VOID
+#define Const2 backspace|empty|enter|false|pi|quote|return|space|tab|true|void
+
+#===============================================================================
+#define Keyword %Key1%|%Key2%|%Key3%|%Key4%|%Key5%|%Key6%
+#define Key1 \b(abort|after|before|case|char|else|end|exit|field|global)\b
+#define Key2 \b(halt|if|ilk|item|in|intersects|into|line|loop|menu|new)\b
+#define Key3 \b(next|of|on|otherwise|pass|property|put|repeat|result)\b
+#define Key4 \b(set|sprite|tell|the|then|to|when|while|with|within|version)\b
+#define Key5 \b(repeat +while|repeat +with|down +to|then +return)\b
+#define Key6 ^[[:space:]]*return\b
+
+#===============================================================================
+#define Punctuator  %Punctuator1%|%Punctuator2%|%Punctuator3%
+#define Punctuator1 (\.|\(|\)|\[|\]|\{|\}|\\|:)
+#define Punctuator2 (\+|-|\*|/|<=?|>=?|<>|=|&&?)
+#define Punctuator3 \b(and|contains|mod|not|or|starts)\b

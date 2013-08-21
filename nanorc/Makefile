@@ -1,4 +1,8 @@
-all: haskell.nanorc java.nanorc prolog.nanorc js.nanorc erlang.nanorc
+all: haskell.nanorc java.nanorc prolog.nanorc js.nanorc erlang.nanorc \
+     lingo.nanorc
+
+lingo.nanorc: lingo.expand.nanorc
+	./expand.py lingo.expand.nanorc > lingo.nanorc
 
 erlang.nanorc: erlang.expand.nanorc erlang.common.nanorc
 	./expand.py erlang.expand.nanorc > erlang.nanorc

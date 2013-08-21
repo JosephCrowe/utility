@@ -1,0 +1,16 @@
+syntax "lingo" "\.ls$"
+
+#===============================================================================
+#===============================================================================
+color brightwhite   "(\.|\(|\)|\[|\]|\{|\}|\\|:)|(\+|-|\*|/|<=?|>=?|<>|=|&&?)|\b(and|contains|mod|not|or|starts)\b"
+color green     "\b(BACKSPACE|EMPTY|ENTER|FALSE|PI|QUOTE|RETURN|SPACE|TAB|TRUE|VOID|backspace|empty|enter|false|pi|quote|return|space|tab|true|void)\b"
+color brightblue      "\b(abort|after|before|case|char|else|end|exit|field|global)\b|\b(halt|if|ilk|item|in|intersects|into|line|loop|menu|new)\b|\b(next|of|on|otherwise|pass|property|put|repeat|result)\b|\b(set|sprite|tell|the|then|to|when|while|with|within|version)\b|\b(repeat +while|repeat +with|down +to|then +return)\b|^[[:space:]]*return\b"
+color yellow       "(\.[0-9]+|[0-9]+(\.[0-9]*)?)([eE][+-][0-9]+)?"
+color yellow       "#[A-Za-z][0-9A-Za-z]*"
+color yellow       ""[^"]*""
+color brightred      "--([^"]|"[^"]*")*$"
+
+#===============================================================================
+#===============================================================================
+#===============================================================================
+#===============================================================================
