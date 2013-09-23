@@ -35,6 +35,7 @@ def define_repl(match):
     name, value = match.groups()
     defns[name] = value.strip()
     return ''
+data = re.compile(r'^##.*', re.M).sub('', data)
 data = re.compile(r'^#define (\w+) (.+)(?:\r?\n?)+', re.M).sub(define_repl, data)
 
 def expand(name, parents=[]):

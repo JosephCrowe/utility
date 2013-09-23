@@ -1,0 +1,62 @@
+syntax "makefile" "((^|/)[Mm]akefile|\.makefile|\.mk)(\.(in|am))?$"
+
+##==============================================================================
+#define AssRightCol     cyan
+#define AssLeftCol      bright%AssRightCol%
+
+#define ShellCol        green
+#define RuleCol         bright%ShellCol%
+
+#define CommentCol      brightblack
+
+#define LeadSpaceCol    ,blue
+#define TabCol          ,green
+#define TrailSpaceCol   %LeadSpaceCol%
+#define TrailTabCol     %TabCol%
+
+##==============================================================================
+color %ShellCol%        start="%Rule%;.*\\$" end="(^|[^\\])$"
+color %ShellCol%        "%Rule%;.*"
+color %RuleCol%         start="%Rule%\\$" end="(^|[^\\])$" "%Rule%"
+color %ShellCol%        start="^	.*\\$" end="(^|\\\\|[^\\])$" "^	.*"
+
+color %AssRightCol%     start="%DefnLeft%." end="(^|\\\\|[^\\])$" "%DefnLeft%.*"
+color %AssLeftCol%      "%DefnLeft%"
+
+color %CommentCol%      start="#(.*[^\\])?\\$" end="(^|\\\\|[^\\])$" "#.*"
+color %LeadSpaceCol%    "^ +"
+color %TrailSpaceCol%   " $"
+color %TabCol%          "	"
+color black             "^	"
+color %TrailTabCol%     "	$"
+
+##==============================================================================
+#define Paren0  \([^()]*\)
+#define Paren1  \((%Paren0%|[^()])*\)
+#define Paren2  \((%Paren1%|[^()])*\)
+#define Paren3  \((%Paren2%|[^()])*\)
+#define Paren4  \((%Paren3%|[^()])*\)
+#define Paren5  \((%Paren4%|[^()])*\)
+#define Paren6  \((%Paren5%|[^()])*\)
+#define Paren7  \((%Paren6%|[^()])*\)
+#define Paren8  \((%Paren7%|[^()])*\)
+#define Paren9  \((%Paren8%|[^()])*\)
+
+#define Brace0  \{[^{}]*\}
+#define Brace1  \{(%Brace0%|[^{}])*\}
+#define Brace2  \{(%Brace1%|[^{}])*\}
+#define Brace3  \{(%Brace2%|[^{}])*\}
+#define Brace4  \{(%Brace3%|[^{}])*\}
+#define Brace5  \{(%Brace4%|[^{}])*\}
+#define Brace6  \{(%Brace5%|[^{}])*\}
+#define Brace7  \{(%Brace6%|[^{}])*\}
+#define Brace8  \{(%Brace7%|[^{}])*\}
+#define Brace9  \{(%Brace8%|[^{}])*\}
+
+#define Macro   \$([^({]|%Paren9%|%Brace9%)
+
+#define Stuff   (%Macro%|[^$:;=])
+#define Rule    ^(%Macro%|[^:;=	])%Stuff%*(:%Stuff%*)+
+
+#define Assign      ([:+?]?=)
+#define DefnLeft    ^([^$:;=	]|%Macro%)+[ 	]*%Assign%

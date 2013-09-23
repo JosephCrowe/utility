@@ -1,0 +1,4 @@
+#define Paren0  <[^>]*>
+#define Paren1  <(%Paren0%|[^<])*>
+#define Paren2  <(%Paren1%|[^<])*>
+%Paren2%

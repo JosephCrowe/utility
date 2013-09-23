@@ -1,5 +1,8 @@
 all: haskell.nanorc java.nanorc prolog.nanorc js.nanorc erlang.nanorc \
-     lingo.nanorc
+     lingo.nanorc makefile.nanorc
+
+makefile.nanorc: makefile.expand.nanorc
+	./expand.py makefile.expand.nanorc > makefile.nanorc
 
 lingo.nanorc: lingo.expand.nanorc
 	./expand.py lingo.expand.nanorc > lingo.nanorc

@@ -3,24 +3,40 @@
 from __future__ import print_function
 import sys
 
-lang = sys.argv[1] if len(sys.argv) > 1 else 'c'
+def main(lang):
+    if lang == 'c':
+        print('/' + '*'*78 + '/')
+    elif lang in ('py', 'sh', '#'):
+        print('#' + '='*79)
+    elif lang in ('py-', 'sh-', '#-'):
+        print('#' + '-'*79)
+    elif lang == 'pro':
+        print('%'*80)
+    elif lang in ('htm', 'html'):
+        print('<!--' + '-'*63 + '-->')
+    elif lang == 'erl':
+        print('%%%' + '='*77)
+    elif lang == 'erl2':
+        print('%%' + '='*78)
+    elif lang == 'erl-':
+        print('%%%' + '-'*77)
+    elif lang == 'erl2-':
+        print('%%' + '-'*78)
+    elif lang == 'erlh':
+        main('erl')
+        print('%%% ')
+        main('erl-')
+    elif lang == 'erl2h':
+        main('erl2')
+        print('%% ')
+        main('erl2-')
+    elif lang == 'ls':
+        print('-'*80)
+    else:
+        print('Error: "%s" is not a recognised language.'
+            % lang, file=sys.stderr)
+        sys.exit(1)
 
-if lang == 'c':
-    print('/' + '*'*78 + '/')
-elif lang == 'py':
-    print('#' + '='*78 + '#')
-elif lang == 'pro':
-    print('%'*80)
-elif lang in ('htm', 'html'):
-    print('<!--' + '-'*63 + '-->')
-elif lang == 'erl':
-    print('%%%' + '='*77)
-elif lang == 'erl2':
-    print('%%' + '='*78)
-elif lang == 'erl-':
-    print('%%%' + '-'*77)
-elif lang == 'erl2-':
-    print('%%' + '-'*78)
-else:
-    print('Error: "%s" is not a recognised language.' % lang, file=sys.stderr)
-    sys.exit(1)
+if __name__ == '__main__':
+    lang = sys.argv[1] if len(sys.argv) > 1 else 'c'
+    main(lang)
