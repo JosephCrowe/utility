@@ -1,2 +1,12 @@
-#!/bin/bash
-py '"\n".join(re.findall(r"\b[^\s\d!?.;:,]+\b", sys.stdin.read()))'
+#!/usr/bin/env python2
+
+import sys
+import re
+
+try:
+    for line in sys.stdin:
+        for match in re.finditer(r'[a-zA-Z0-9\'\-_]+', line):
+            print(match.group())
+except KeyboardInterrupt:
+    pass
+

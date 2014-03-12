@@ -1,0 +1,17 @@
+#!/bin/bash
+
+KCODEC=sjis
+KFLAGS=$(echo -{K,H,J}a -s -p -rhepburn)
+
+rj () {
+    echo "$@" \
+    | iconv -t$KCODEC \
+    | kakasi $KFLAGS -{i,o}$KCODEC \
+    | iconv -f$KCODEC;
+}
+
+if [[ "$@" ]]; then
+    rj "$@"
+else
+    while read LINE; do rj "$LINE"; done
+fi

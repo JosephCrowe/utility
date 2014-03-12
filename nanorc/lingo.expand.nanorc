@@ -7,13 +7,15 @@ syntax "lingo" "\.ls$"
 #define Colour_String       yellow
 #define Colour_Symbol       green
 #define Colour_Constant     cyan
+#define Colour_Identifier   white
 #define Colour_Comment      brightred
 
 #===============================================================================
 color %Colour_Punctuator%   "%Punctuator%"
+color %Colour_Number%       "%Number%"
+color %Colour_Identifier%   "%Identifier%"
 color %Colour_Constant%     "%Constant%"
 color %Colour_Keyword%      "%Keyword%"
-color %Colour_Number%       "%Number%"
 color %Colour_Symbol%       "%Symbol%"
 color %Colour_String%       "%String%"
 color %Colour_Comment%      "%Comment%"
@@ -23,6 +25,9 @@ color %Colour_Comment%      "%Comment%"
 #define String      "[^"]*"
 #define Symbol      #[A-Za-z_][0-9A-Za-z_]*
 #define Number      (\.[0-9]+|[0-9]+(\.[0-9]*)?)([eE][+-][0-9]+)?
+
+#===============================================================================
+#define Identifier \b[A-Za-z_][0-9A-Za-z_]*\b
 
 #===============================================================================
 #define Constant \b(%Const1%|%Const2%)\b

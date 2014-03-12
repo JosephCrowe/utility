@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for F in "$@"; do
+    gzip -dc "$F" 2>/dev/null || cat "$F"
+done

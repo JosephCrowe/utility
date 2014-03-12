@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+import subprocess
+import os.path
+import sys
+import re
+
+def mkvdetach(input_file):
+    mkvinfo = subprocess.check_output(['mkvinfo', input_file]).decode('utf8')
+    mkvextract_args = ['attachments', input_file]
+    attach_id = 1
+    for match in re.finditer(r'^\|  \+ File name: (.*)', mkvinfo, re.M):
+        mkvextract_args.append('%s:%s' % (attach_id, match.group(1)))
+        attach_id += 1
+    subprocess.call(['mkvextract'] + mkvextract_args)
+
+if __name__ == '__main__':
+    if '--help' in sys.argv[1:] or '-h' in sys.argv[1:] or len(sys.argv) < 2:
+        basename = os.path.basename(sys.argv[0])
+        print('Usage: %s INPUT_FILE [INPUT_FILE..]' % basename, file=sys.stderr)
+        print('Extracts all attachments from the given MKV files'
+              ' into the current directory.', file=sys.stderr)
+        sys.exit(2)
+    for input_file in sys.argv[1:]:
+        mkvdetach(input_file)
