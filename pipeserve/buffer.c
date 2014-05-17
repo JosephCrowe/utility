@@ -68,7 +68,7 @@ ssize_t buffer_readline_r(int fd, char **line, size_t *rsize, char **rdata ) {
 
         // The buffer is not yet full, and no newline has been found.
         bytes = read(buffer->fd, buffer->end, space);
-        if (bytes == -1) break;
+        if (bytes == -1 || bytes == 0) break;
         buffer->end += bytes;
     }
 
