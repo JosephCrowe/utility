@@ -1,2 +1,2 @@
 #!/bin/bash
-cat ${1:-/dev/stdin} | trimnl | xclip -selection clipboard
+cat "${1:-/dev/stdin}" | trimnl | xclip -selection clipboard

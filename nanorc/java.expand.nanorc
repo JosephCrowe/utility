@@ -2,7 +2,7 @@ syntax "java" "\.java$"
 
 #define ErrorCol brightred
 #define TrailWSCol blue
-#define TabCol red
+#define TabCol blue
 #define KeywordCol brightcyan
 #define SeparatorCol brightwhite
 #define OperatorCol brightgreen

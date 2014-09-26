@@ -1,0 +1,7 @@
+syntax "txt" "\.txt$"
+
+## Trailing whitespace
+color ,green "[[:space:]]+$"
+
+## Tabs
+color ,blue "	"

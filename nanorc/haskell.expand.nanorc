@@ -1,7 +1,7 @@
-syntax "haskell" "\.hs$"
+syntax "haskell" "\.hs(-boot)?$"
 #include haskell.common.nanorc
 
-syntax "lhaskell" "\.lhs$"
+syntax "lhaskell" "\.lhs(-boot)$"
 #include haskell.common.nanorc
 color brightblue "^>"
 color brightblack "^[^>].*"
