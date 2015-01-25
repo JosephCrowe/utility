@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 import sys
 import re
 import os.path
@@ -10,7 +10,7 @@ except ImportError:
 if len(sys.argv) >= 2:
     filename = sys.argv[1]
 else:
-    print 'Usage: %s FILENAME' % os.path.basename(sys.argv[0])
+    print('Usage: %s FILENAME' % os.path.basename(sys.argv[0]))
     sys.exit(1)
 
 def stderr(msg):
@@ -52,12 +52,12 @@ def expand(name, parents=[]):
     defns[name] = re.sub(r'%(\w+)%', repl, defns[name])
     return defns[name]
 
-map(expand, defns.iterkeys())
+map(expand, defns.keys())
 
 if '--debug' in sys.argv:
-    width = max(len(key) for key in defns.iterkeys())
-    for name, value in defns.iteritems():
-        print '  %s%s := %s' % (name, ' '*(width - len(name)), value)
+    width = max(len(key) for key in defns.keys())
+    for name, value in defns.items():
+        print('  %s%s := %s' % (name, ' '*(width - len(name)), value))
     sys.exit(1)
 
 def expand_repl(match):
