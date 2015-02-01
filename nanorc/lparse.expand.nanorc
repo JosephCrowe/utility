@@ -1,0 +1,17 @@
+syntax "lparse" "\.lp$"
+
+#define UpperCol cyan
+#define SymbolCol brightgreen
+#define CommentCol brightblack
+#define StringCol brightmagenta
+#define MetaCol green
+
+color %MetaCol% "#[a-zA-Z0-9_]+"
+color %UpperCol% "\b[A-Z_][A-Za-z0-9_]*\b"
+color %SymbolCol% "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#)"
+
+color %StringCol% "'[^']*'"
+
+color %CommentCol% "%.*"
+color %CommentCol% "/\*/"
+color %CommentCol% start="/\*" end="\*/"

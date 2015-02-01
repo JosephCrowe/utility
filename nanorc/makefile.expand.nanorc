@@ -23,7 +23,7 @@ color %ShellCol%        start="^	.*\\$" end="(^|\\\\|[^\\])$" "^	.*"
 color %AssRightCol%     start="%DefnLeft%." end="(^|\\\\|[^\\])$" "%DefnLeft%.*"
 color %AssLeftCol%      "%DefnLeft%"
 
-color %CommentCol%      start="#(.*[^\\])?\\$" end="(^|\\\\|[^\\])$" "#.*"
+## color %CommentCol%      start="#(()*[^\\])?\\$" end="(^|\\\\|[^\\])$" "#.*"
 color %LeadSpaceCol%    "^ +"
 color %TrailSpaceCol%   " $"
 color %TabCol%          "	"
