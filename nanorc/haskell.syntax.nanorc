@@ -12,6 +12,6 @@ color %KeywordCol% "\b(case|class|data|default|deriving|do|else|if|import|in|inf
 
 color %StringCol% ""(\\.|[^"])*"|'(\\.|\\[0-9A-Z]+|\\x[0-9A-F]+|[^'])'"
 
-color %CommentCol% "--([^"]|"(\\.|[^"])")*$"
+color %CommentCol% "--([^"]|"(\\.|[^"])*")*$"
 color %CommentCol% start="\{-" end="-\}"
 color %CommentCol% "^#!.*"
