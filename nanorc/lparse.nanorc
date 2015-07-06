@@ -2,9 +2,9 @@ syntax "lparse" "\.lp$"
 
 color green "#[a-zA-Z0-9_]+"
 color cyan "\b[A-Z_][A-Za-z0-9_]*\b"
-color brightgreen "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#|<=?|>=?)"
+color brightgreen "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#|<=?|>=?|\{|\})"
 
-color brightmagenta "'[^']*'"
+color brightmagenta ""[^']*""
 
 color brightblack "%.*"
 color brightblack "/\*/"

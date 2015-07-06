@@ -6,12 +6,4 @@ syntax "lparse" "\.lp$"
 #define StringCol brightmagenta
 #define MetaCol green
 
-color %MetaCol% "#[a-zA-Z0-9_]+"
-color %UpperCol% "\b[A-Z_][A-Za-z0-9_]*\b"
-color %SymbolCol% "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#|<=?|>=?)"
-
-color %StringCol% "'[^']*'"
-
-color %CommentCol% "%.*"
-color %CommentCol% "/\*/"
-color %CommentCol% start="/\*" end="\*/"
+#include lparse.syntax.nanorc

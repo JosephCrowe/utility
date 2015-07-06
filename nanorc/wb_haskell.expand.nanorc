@@ -1,0 +1,12 @@
+syntax "wb_hs"
+
+#define ErrorCol   brightmagenta
+#define NumberCol  brightred
+#define StringCol  brightred
+#define SymbolCol  brightblack
+#define LowerCol   black
+#define UpperCol   brightblue
+#define KeywordCol brightblack
+#define CommentCol red
+
+#include haskell.syntax.nanorc

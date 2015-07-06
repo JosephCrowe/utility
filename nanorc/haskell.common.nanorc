@@ -1,17 +1,10 @@
-color brightred ".*"
+#define ErrorCol   brightred
+#define NumberCol  brightmagenta
+#define StringCol  brightmagenta 
+#define SymbolCol  brightgreen
+#define LowerCol   white
+#define UpperCol   cyan
+#define KeywordCol brightcyan
+#define CommentCol brightblack
 
-color brightmagenta "\b([0-9]+|0[Xx][0-9A-Fa-f]+|0[Oo][0-7]+)\b"
-
-color brightgreen "!|#|\$|%|&|\*|\+|\.|/|<|=|>|\?|@|\\|\^|\||-|~"
-color brightgreen "\.\.|:|::|=|\\|\||<-|->|@|~|=>"
-color brightgreen "\(|\)|\[|\]|\{|\}|,|;|`"
-
-color white "\b[a-z]([A-Za-z0-9]|_|')*"
-color cyan "\b[A-Z]([A-Za-z0-9]|_|')*"
-color brightcyan "\b(case|class|data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified|hiding|qualified|as|rec)\b"
-
-color brightmagenta ""(\\.|[^"])*"|'(\\.|\\[0-9A-Z]+|\\x[0-9A-F]+|[^'])'"
-
-color brightblack "--([^"]|"(\\.|[^"])")*$"
-color brightblack start="\{-" end="-\}"
-color brightblack "^#!.*"
+#include haskell.syntax.nanorc

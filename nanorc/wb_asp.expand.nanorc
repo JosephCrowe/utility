@@ -1,0 +1,9 @@
+syntax "wb_asp"
+
+#define UpperCol    brightblue
+#define SymbolCol   brightblack
+#define CommentCol  red
+#define StringCol   brightred
+#define MetaCol     brightblack
+
+#include lparse.syntax.nanorc
