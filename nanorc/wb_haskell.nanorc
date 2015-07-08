@@ -10,7 +10,7 @@ color brightblack "\(|\)|\[|\]|\{|\}|,|;|`"
 
 color black "\b[a-z]([A-Za-z0-9]|_|')*"
 color brightblue "\b[A-Z]([A-Za-z0-9]|_|')*"
-color brightblack "\b(case|class|data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified|hiding|qualified|as|rec)\b"
+color brightblack "\b(case|class|data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified|hiding|qualified|as|rec|by)\b"
 
 color brightred ""(\\.|[^"])*"|'(\\.|\\[0-9A-Z]+|\\x[0-9A-F]+|[^'])'"
 
