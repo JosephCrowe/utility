@@ -6,11 +6,11 @@ color %SymbolCol% "!|#|\$|%|&|\*|\+|\.|/|<|=|>|\?|@|\\|\^|\||-|~"
 color %SymbolCol% "\.\.|:|::|=|\\|\||<-|->|@|~|=>"
 color %SymbolCol% "\(|\)|\[|\]|\{|\}|,|;|`"
 
-color %LowerCol% "\b[a-z]([A-Za-z0-9]|_|')*"
-color %UpperCol% "\b[A-Z]([A-Za-z0-9]|_|')*"
-color %KeywordCol% "\b(case|class|data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified|hiding|qualified|as|rec|by)\b"
+color %LowerCol% "\b_*[a-z]([A-Za-z0-9]|_|')*"
+color %UpperCol% "\b_*[A-Z]([A-Za-z0-9]|_|')*"
+color %KeywordCol% "\b(case|class|data|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|module|newtype|of|then|type|where|_|qualified|hiding|qualified|as|rec|by|type family)\b"
 
-color %StringCol% ""(\\.|[^"])*"|'(\\.|\\[0-9A-Z]+|\\x[0-9A-F]+|[^'])'"
+color %StringCol% ""(\\.|[^\"])*"|'(\\.|\\[0-9A-Z]+|\\x[0-9A-F]+|[^'])'"
 
 color %CommentCol% "--([^"]|"(\\.|[^"])*")*$"
 color %CommentCol% start="\{-" end="-\}"

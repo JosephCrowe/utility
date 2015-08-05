@@ -4,8 +4,14 @@ color green "#[a-zA-Z0-9_]+"
 color cyan "\b[A-Z_][A-Za-z0-9_]*\b"
 color brightgreen "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#|<=?|>=?|\{|\})"
 
+color yellow "@[a-zA-Z0-9_]+"
+
 color brightmagenta ""[^']*""
 
+color yellow start="#begin_lua" end="#end_lua"
+color brightgreen "#(begin|end)_lua"
+color green "(begin|end)_lua"
+
 color brightblack "%.*"
-color brightblack "/\*/"
-color brightblack start="/\*" end="\*/"
+color brightblack "%\*"
+color brightblack start="%\*" end="\*%"

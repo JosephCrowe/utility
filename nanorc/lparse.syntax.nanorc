@@ -2,8 +2,14 @@ color %MetaCol% "#[a-zA-Z0-9_]+"
 color %UpperCol% "\b[A-Z_][A-Za-z0-9_]*\b"
 color %SymbolCol% "(\(|\)|\[|\]|,|\.|:-|->|;|\||:|!=|=|#|<=?|>=?|\{|\})"
 
+color %ScriptCol% "@[a-zA-Z0-9_]+"
+
 color %StringCol% ""[^']*""
 
+color %ScriptCol% start="#begin_lua" end="#end_lua"
+color %SymbolCol% "#(begin|end)_lua"
+color %MetaCol% "(begin|end)_lua"
+
 color %CommentCol% "%.*"
-color %CommentCol% "/\*/"
-color %CommentCol% start="/\*" end="\*/"
+color %CommentCol% "%\*"
+color %CommentCol% start="%\*" end="\*%"
