@@ -31,7 +31,7 @@ int main(void) {
     while (!feof(stdin)) {
         read_line(&buf, &buf_s, &len);
         if (!len) break;
-        buf[len-1] = '\0';
+        if (buf[len-1] == '\n') buf[len-1] = '\0';
         if (first) first = 0;
         else fputc('\n', stdout);
         fputs(buf, stdout);
