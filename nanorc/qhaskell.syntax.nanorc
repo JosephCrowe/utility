@@ -1,0 +1,13 @@
+#include haskell.syntax.nanorc
+
+#define QQo \[\:
+#define QQc \:\]
+#define QHo \:\[
+#define QHc \]\:
+color %QQuoteCol% start="\[([abcf-oqrsu-z_]|[[:lower:]_][[:alnum:]_']+)\||%QQo%|%QHc%" end="%QQc%|%QHo%|\|\]"
+color %QQDelimCol% "%QQo%|%QQc%"
+color %QHDelimCol% "%QHo%|%QHc%"
+
+color %CommentCol% "--([^"]|"(\\.|[^"])*")*$"
+color %CommentCol% start="\{-" end="-\}"
+color %CommentCol% "^#!.*"

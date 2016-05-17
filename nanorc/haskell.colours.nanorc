@@ -6,5 +6,6 @@
 #define UpperCol   cyan
 #define KeywordCol brightcyan
 #define CommentCol brightblack
-
-#include haskell.syntax.nanorc
+#define QQuoteCol  magenta
+#define QQDelimCol brightmagenta
+#define QHDelimCol brightgreen
