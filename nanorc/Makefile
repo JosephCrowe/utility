@@ -1,5 +1,5 @@
 all: haskell.nanorc java.nanorc prolog.nanorc js.nanorc erlang.nanorc \
-     lingo.nanorc makefile.nanorc lparse.nanorc wb_asp.nanorc wb_haskell.nanorc
+    lingo.nanorc makefile.nanorc lparse.nanorc wb_asp.nanorc wb_haskell.nanorc
 
 wb_haskell.nanorc: wb_haskell.expand.nanorc haskell.syntax.nanorc
 	./expand.py wb_haskell.expand.nanorc > wb_haskell.nanorc
@@ -19,7 +19,7 @@ lingo.nanorc: lingo.expand.nanorc
 erlang.nanorc: erlang.expand.nanorc erlang.common.nanorc
 	./expand.py erlang.expand.nanorc > erlang.nanorc
 
-haskell.nanorc: haskell.common.nanorc haskell.expand.nanorc haskell.syntax.nanorc
+haskell.nanorc: haskell.*.nanorc
 	./expand.py haskell.expand.nanorc > haskell.nanorc
 
 java.nanorc: java.expand.nanorc

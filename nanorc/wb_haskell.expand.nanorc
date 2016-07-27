@@ -9,4 +9,8 @@ syntax "wb_hs"
 #define KeywordCol brightblack
 #define CommentCol red
 
+#define QQuoteCol  red
+#define QQDelimCol brightred
+#define QHDelimCol brightred
+
 #include haskell.syntax.nanorc

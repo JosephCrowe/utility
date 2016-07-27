@@ -1,7 +1,14 @@
 syntax "haskell" "\.hs(-boot)?$"
-#include haskell.common.nanorc
+#include haskell.colours.nanorc
+#include haskell.syntax.nanorc
 
 syntax "lhaskell" "\.lhs(-boot)$"
-#include haskell.common.nanorc
+#include haskell.colours.nanorc
+#include haskell.syntax.nanorc
 color brightblue "^>"
 color brightblack "^[^>].*"
+
+syntax "qhaskell"
+header "\{-#[[:space:]]*LANGUAGE[[:space:]]+QuasiQuotes.*#-\}"
+#include haskell.colours.nanorc
+#include qhaskell.syntax.nanorc
