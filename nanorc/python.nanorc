@@ -7,5 +7,7 @@ color brightgreen "\"([^\"\\]|\\.)*\""
 color brightgreen "'([^'\\]|\\.)*'"
 color brightred "^[	 ]*#.*$"
 color brightred "#([^'\"]|'[^']*'|"[^"]*")*$"
-color brightgreen start="'''" end="'''"
-color brightgreen start=""""" end="""""
+
+color brightgreen start="^[[:space:]]*'''" end="'''$"
+
+color brightgreen start="^[[:space:]]*"""" end=""""$"
