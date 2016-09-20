@@ -1,4 +1,10 @@
 haskell.nanorc
 java.nanorc
 prolog.nanorc
+js.nanorc
+erlang.nanorc
+lingo.nanorc
+makefile.nanorc
+lparse.nanorc
+wb_asp.nanorc
 wb_haskell.nanorc
