@@ -20,4 +20,4 @@ cat > $TMP <<-tac
 
 	main = $*
 tac
-runghc $TMP
+exec runghc $TMP

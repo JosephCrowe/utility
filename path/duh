@@ -4,7 +4,7 @@ if [[ $# < 1 ]]; then
     echo "Usage: `basename $0` FILES..." >&2
     exit 1
 elif [[ $# == 1 ]]; then
-    du -bhs "$@" | sort -h
+    exec du -bhs "$@" | sort -h
 else
-    du -bhsc "$@" | sort -h
+    exec du -bhsc "$@" | sort -h
 fi
