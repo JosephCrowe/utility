@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if (( $# == 0 )); then
+    echo >&2 "Usage: $(basename $0) FILES..."
+    exit 2
+fi
+
+for F in "$@"; do
+    G=$(dirname "$F")/$(basename -z "$F" | tr '\000<>:"/\\|?*\001-\037' '\n-')
+    [[ "$F" == "$G" ]] && continue
+    printf 'mv %q \\\n' "$F"
+    printf '   %q\n\n' "$G"
+done
